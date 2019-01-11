@@ -4,11 +4,6 @@ const express = require('express');
 var app = express();
 app.set('view engine', 'ejs');
 
-// use res.render to load up an ejs view file
-
-// index page 
-
-
 app.listen(8080);
 console.log('8080 is the magic port');
 
@@ -75,26 +70,57 @@ console.log('8080 is the magic port');
     })
     .then(function() {
         page.tap('input[id="cmdDisplay"]');
-        return wait1000(500);    
+        return wait1000(500);
+    // })
+    // .then(function() {
+    //     temp = page.content();
+
+    //     return wait1000(1000);
+    // })
+    // .then(function() {
+        
+    //     app.get('/', function(req, res) {
+    //         res.render('pages/index',{html:temp});
+    //     });
+
     }); 
         
-    //console.log(await page.content());
-
+    temp = await page.content();
     app.get('/', function(req, res) {
-        res.render('pages/index',page.content());
+        res.render('pages/index',{html:temp});
     });
+  
 
+    function intervalFunc() {
+        page.tap('input[id="cmdDisplay"]');
+        temp = page.content();
 
-               
-        // const inputElement6 = await page.$('input[id="chkboxKikai_51"]');
-        // await inputElement6.click();
-         
-
+    }
       
+    setInterval(intervalFunc, 15000);
 
-      
-        console.log('done');
-        //await browser.close();
+    // wait1000()
+    // .then(function() {
+    //     page.tap('input[id="cmdDisplay"]');
+    //     return wait1000(500);
+    // })
+    // .then(function() {
+    //     temp = await page.content();
+
+    //     return wait1000(500);
+    // })
+    // .then(function() {
+    //     app.get('/', function(req, res) {
+    //         res.render('pages/index',{html:temp});
+    //     });
+
+    // });
+
+    // const inputElement6 = await page.$('input[id="chkboxKikai_51"]');
+    // await inputElement6.click();
+    
+    console.log('done');
+    //await browser.close();
     }catch(e) {
         console.log('our erro',e);
     }
