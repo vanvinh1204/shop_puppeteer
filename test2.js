@@ -4,13 +4,13 @@ const express = require('express');
 var app = express();
 app.set('view engine', 'ejs');
 
-app.listen(8080);
-console.log('8080 is the magic port');
+app.listen(3000);
+console.log('3000 is the magic port');
 
 (async function main() {
     try {
         const browser = await puppeteer.launch({ 
-            headless: false,
+            headless: true,
             defaultViewport: {width:1366,height:800}
         });
         const page = await browser.newPage();
